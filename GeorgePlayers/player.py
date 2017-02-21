@@ -1,6 +1,8 @@
 COOPERATE = 0
 DEFECT = 1
 
+PAYOFF = [[[6, 3], [3, 0]], [[8, 5], [5, 2]]]
+
 
 class Player(object):
     """
