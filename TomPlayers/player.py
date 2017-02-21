@@ -1,3 +1,7 @@
+COOPERATE = 0
+DEFECT = 1
+
+
 class Player(object):
     """
     This defines an interface for a player of the 3-player.

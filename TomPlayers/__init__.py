@@ -1,7 +1,3 @@
-class TomPlayer:
+from .lamantia_player import LamantiaPlayer
 
-    def play(*args):
-        return 1 # defect
-
-
-PLAYERS = [TomPlayer, TomPlayer, TomPlayer]
+PLAYERS = [LamantiaPlayer, LamantiaPlayer, LamantiaPlayer]
