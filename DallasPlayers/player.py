@@ -26,6 +26,8 @@ class Player(object):
     JUMP = 0.2
     ACCEPTABLE = 3
 
+    GOD = 'Dallas'
+
     def studentID(self):
         """ Returns the creator's numeric studentID """
         raise NotImplementedError("studentID not implemented")

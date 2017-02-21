@@ -15,6 +15,8 @@ class Player(object):
     available about the current state of play.
     """
 
+    GOD = 'George'
+
     def studentID(self):
         """ Returns the creator's numeric studentID """
         raise NotImplementedError("studentID not implemented")
