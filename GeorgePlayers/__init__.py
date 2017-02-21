@@ -1,2 +1,3 @@
-# TODO add your three players
-PLAYERS = []
+from .tit_for_tat_player import TitForTatPlayer
+
+PLAYERS = [TitForTatPlayer, TitForTatPlayer, TitForTatPlayer]
