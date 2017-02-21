@@ -1,10 +1,10 @@
 '''
 This Python module models the three-player Prisoner's Dilemma game.
-We use the integer "0" to represent cooperation, and "1" to represent 
-defection. 
+We use the integer "0" to represent cooperation, and "1" to represent
+defection.
 
 Recall that in the 2-players dilemma, U(DC) > U(CC) > U(DD) > U(CD), where
-we give the payoff for the first player in the list. We want the three-player game 
+we give the payoff for the first player in the list. We want the three-player game
 to resemble the 2-player game whenever one player's response is fixed, and we
 also want symmetry, so U(CCD) = U(CDC) etc. This gives the unique ordering
 
