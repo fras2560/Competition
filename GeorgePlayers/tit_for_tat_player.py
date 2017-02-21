@@ -3,9 +3,6 @@ from .player import Player, COOPERATE, DEFECT
 
 class TitForTatPlayer(Player):
 
-    def agentName(self):
-        return "George's Tit For Tat Player"
-
     def play(self, my_history, opp1_history, opp2_history):
         def last(history):
             return history[-1]
