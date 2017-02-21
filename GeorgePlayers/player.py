@@ -1,3 +1,9 @@
+COOPERATE = 0
+DEFECT = 1
+
+PAYOFF = [[[6, 3], [3, 0]], [[8, 5], [5, 2]]]
+
+
 class Player(object):
     """
     This defines an interface for a player of the 3-player.
@@ -10,6 +16,8 @@ class Player(object):
     to implement do so.  The parameters to play(...) contain all information
     available about the current state of play.
     """
+
+    GOD = 'George'
 
     def studentID(self):
         """ Returns the creator's numeric studentID """

@@ -1,2 +1,3 @@
-# TODO add three more players
-PLAYERS = []
+from .lamantia_player import LamantiaPlayer
+
+PLAYERS = [LamantiaPlayer, LamantiaPlayer, LamantiaPlayer]

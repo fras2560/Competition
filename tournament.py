@@ -1,10 +1,10 @@
 '''
 This Python module models the three-player Prisoner's Dilemma game.
-We use the integer "0" to represent cooperation, and "1" to represent 
-defection. 
+We use the integer "0" to represent cooperation, and "1" to represent
+defection.
 
 Recall that in the 2-players dilemma, U(DC) > U(CC) > U(DD) > U(CD), where
-we give the payoff for the first player in the list. We want the three-player game 
+we give the payoff for the first player in the list. We want the three-player game
 to resemble the 2-player game whenever one player's response is fixed, and we
 also want symmetry, so U(CCD) = U(CDC) etc. This gives the unique ordering
 
@@ -21,6 +21,7 @@ from GeorgePlayers import PLAYERS as GEORGEPLAYERS
 
 import random
 import math
+from collections import defaultdict
 
 PAYOFF = [[[6, 3], [3, 0]], [[8, 5], [5, 2]]]
 NROUNDS = 100
@@ -93,15 +94,15 @@ def getPlayer(i):
     index, and returns an instance of a given player given an index
     """
     phoneBook = {
-        0: DALLASPLAYERS[0](),
-        1: DALLASPLAYERS[1](),
-        2: DALLASPLAYERS[2](),
-        3: TOMPLAYERS[0](),
-        4: TOMPLAYERS[1](),
-        5: TOMPLAYERS[2](),
-        6: GEORGEPLAYERS[0](),
-        7: GEORGEPLAYERS[1](),
-        8: GEORGEPLAYERS[2]()
+        0: DALLASPLAYERS[0],
+        1: DALLASPLAYERS[1],
+        2: DALLASPLAYERS[2],
+        3: TOMPLAYERS[0],
+        4: TOMPLAYERS[1],
+        5: TOMPLAYERS[2],
+        6: GEORGEPLAYERS[0],
+        7: GEORGEPLAYERS[1],
+        8: GEORGEPLAYERS[2],
     }
     if i < 0 or i >= len(phoneBook):
         raise IndexError("getPlayer() index out of bounds")
@@ -151,19 +152,53 @@ def runTournament(nPlayers):
     getPlayers(...) function
     """
     tournamentResults = []
+    god_scores = defaultdict(list)
+    agent_scores = defaultdict(list)
     for p in range(nPlayers):
         schedule = scheduleGamesForPlayer(nPlayers, p)
         pTally = 0
         pGames = 0
         for s in schedule:
-            [s1, s2, s3] = scoreGame(getPlayer(s[0]),
-                                     getPlayer(s[1]),
-                                     getPlayer(s[2]),
-                                     NROUNDS)
+            p1 = getPlayer(s[0])
+            p2 = getPlayer(s[1])
+            p3 = getPlayer(s[2])
+            [s1, s2, s3] = scoreGame(p1, p2, p3, NROUNDS)
+            for player, score in [(p1,s1), (p2,s2), (p3,s3)]:
+                god_scores[player.GOD].append(score)
+                agentname = player.GOD + ' ' + player.agentName()
+                agent_scores[agentname].append(score)
+
             pTally += s1
             pGames += 1
         tournamentResults.append(pTally / pGames)
-    return tournamentResults
+    return tournamentResults, dict(god_scores), dict(agent_scores)
 
 # print(scheduleGamesForPlayer(3, 0))
-print(runTournament(3))
+def mergescores(score_dict1, score_dict2):
+    """ Merges two score dictionaries by concatenating score lists at key """
+    sd1 = dict(**score_dict1) # copy dict
+    for k, scores in score_dict2.items():
+        if k not in sd1: sd1[k] = scores
+        else: sd1[k] += scores
+    return sd1
+
+def print_scores(score_dict):
+    def average(arr):
+        return sum(arr) / len(arr)
+
+    fld = max(map(len, score_dict.keys())) + 1
+    for key, scores in sorted(score_dict.items(), key=lambda x: average(x[1]), reverse=True):
+        print("{name:>{fieldw}}: {avg:.1f} (games={count})".format(
+            fieldw=fld, name=key, avg=average(scores), count=len(scores)
+        ))
+
+gods = {}
+agents = {}
+for i in range(100):
+    tourn, god_scores, agent_scores = runTournament(3*3)
+    gods = mergescores(gods, god_scores)
+    agents = mergescores(agents, agent_scores)
+
+print_scores(gods)
+print()
+print_scores(agents)

@@ -1,3 +1,7 @@
+COOPERATE = 0
+DEFECT = 1
+
+
 class Player(object):
     """
     This defines an interface for a player of the 3-player.
@@ -10,6 +14,8 @@ class Player(object):
     to implement do so.  The parameters to play(...) contain all information
     available about the current state of play.
     """
+
+    GOD = 'Tom'
 
     def studentID(self):
         """ Returns the creator's numeric studentID """

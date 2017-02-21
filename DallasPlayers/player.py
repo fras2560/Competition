@@ -5,7 +5,7 @@
 @date: 2016-02-13
 @note: contains base class for players
 '''
-from prison import PAYOFF
+PAYOFF = [[[6, 3], [3, 0]], [[8, 5], [5, 2]]]
 import unittest
 DEFECT = 1
 COOPERATE = 0
@@ -25,6 +25,8 @@ class Player(object):
     """
     JUMP = 0.2
     ACCEPTABLE = 3
+
+    GOD = 'Dallas'
 
     def studentID(self):
         """ Returns the creator's numeric studentID """
