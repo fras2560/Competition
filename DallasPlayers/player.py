@@ -5,7 +5,7 @@
 @date: 2016-02-13
 @note: contains base class for players
 '''
-from prison import PAYOFF
+PAYOFF = [[[6, 3], [3, 0]], [[8, 5], [5, 2]]]
 import unittest
 DEFECT = 1
 COOPERATE = 0
