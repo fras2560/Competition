@@ -93,15 +93,15 @@ def getPlayer(i):
     index, and returns an instance of a given player given an index
     """
     phoneBook = {
-        0: DALLASPLAYERS[0](),
-        1: DALLASPLAYERS[1](),
-        2: DALLASPLAYERS[2](),
-        3: TOMPLAYERS[0](),
-        4: TOMPLAYERS[1](),
-        5: TOMPLAYERS[2](),
-        6: GEORGEPLAYERS[0](),
-        7: GEORGEPLAYERS[1](),
-        8: GEORGEPLAYERS[2]()
+        0: DALLASPLAYERS[0],
+        1: DALLASPLAYERS[1],
+        2: DALLASPLAYERS[2],
+        3: TOMPLAYERS[0],
+        4: TOMPLAYERS[1],
+        5: TOMPLAYERS[2],
+        6: GEORGEPLAYERS[0],
+        7: GEORGEPLAYERS[1],
+        8: GEORGEPLAYERS[2],
     }
     if i < 0 or i >= len(phoneBook):
         raise IndexError("getPlayer() index out of bounds")
