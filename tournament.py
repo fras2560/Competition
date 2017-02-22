@@ -173,32 +173,35 @@ def runTournament(nPlayers):
         tournamentResults.append(pTally / pGames)
     return tournamentResults, dict(god_scores), dict(agent_scores)
 
-# print(scheduleGamesForPlayer(3, 0))
+
 def mergescores(score_dict1, score_dict2):
     """ Merges two score dictionaries by concatenating score lists at key """
-    sd1 = dict(**score_dict1) # copy dict
+    # copy dict
+    sd1 = dict(**score_dict1)
     for k, scores in score_dict2.items():
         if k not in sd1: sd1[k] = scores
         else: sd1[k] += scores
     return sd1
 
+
 def print_scores(score_dict):
     def average(arr):
         return sum(arr) / len(arr)
-
     fld = max(map(len, score_dict.keys())) + 1
-    for key, scores in sorted(score_dict.items(), key=lambda x: average(x[1]), reverse=True):
+    for key, scores in sorted(score_dict.items(), key=lambda x: average(x[1]),
+                              reverse=True):
         print("{name:>{fieldw}}: {avg:.1f} (games={count})".format(
             fieldw=fld, name=key, avg=average(scores), count=len(scores)
         ))
 
-gods = {}
-agents = {}
-for i in range(100):
-    tourn, god_scores, agent_scores = runTournament(3*3)
-    gods = mergescores(gods, god_scores)
-    agents = mergescores(agents, agent_scores)
 
-print_scores(gods)
-print()
-print_scores(agents)
+if __name__ == "__main__":
+    gods = {}
+    agents = {}
+    for i in range(100):
+        tourn, god_scores, agent_scores = runTournament(3*3)
+        gods = mergescores(gods, god_scores)
+        agents = mergescores(agents, agent_scores)
+    print_scores(gods)
+    print()
+    print_scores(agents)
