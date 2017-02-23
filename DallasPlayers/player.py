@@ -5,8 +5,8 @@
 @date: 2016-02-13
 @note: contains base class for players
 '''
-PAYOFF = [[[6, 3], [3, 0]], [[8, 5], [5, 2]]]
 import unittest
+PAYOFF = [[[6, 3], [3, 0]], [[8, 5], [5, 2]]]
 DEFECT = 1
 COOPERATE = 0
 
@@ -62,9 +62,10 @@ class Player(object):
                 scores[a1] += PAYOFF[a1][a2][a3]
                 times[a1] += 1
             result = COOPERATE
-            if (scores[DEFECT] / times[DEFECT] >
-                    scores[COOPERATE] / times[COOPERATE]):
-                result = DEFECT
+            if times[DEFECT] > 0 and times[COOPERATE] > 0:
+                if (scores[DEFECT] / times[DEFECT] and
+                        scores[COOPERATE] / times[COOPERATE]):
+                    result = DEFECT
         return result
 
     def play(self, myHistory, oppHistory1, oppHistory2):
