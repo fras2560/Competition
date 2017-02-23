@@ -21,7 +21,7 @@ class GrudgerPlayer(Player):
         return "20652186"
 
     def agentName(self):
-        return "Cooperate Player"
+        return "Grudger Player"
 
     def play(self, myHistory, oppHistory1, oppHistory2):
         if self.first_move(oppHistory1, oppHistory2):
