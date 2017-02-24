@@ -6,7 +6,7 @@
 @note: analyzing the different players
 '''
 from tournament import scoreGame
-from DallasPlayers import PLAYERS
+from DallasPlayers.profile_player import ProfilePlayer, ALL_PLAYERS as PLAYERS
 
 
 def run_matchup(p1, p2, p3, matches, rounds):
@@ -31,12 +31,12 @@ def player_pairs():
 
 
 def run(matches, rounds):
-    with open("outputs2.csv", "w+") as f:
-        for competitors in player_pairs():
-            print("{} & {}".format(competitors[0].agentName(),
-                                   competitors[1].agentName()))
-            for p in range(0, len(PLAYERS)):
-                player = PLAYERS[p]()
+    with open("stalkeroutputs.csv", "w+") as f:
+        for p in PLAYERS:
+            for competitors in player_pairs():
+                print("{} & {}".format(competitors[0].agentName(),
+                                       competitors[1].agentName()))
+                player = p()
                 results = run_matchup(player,
                                       competitors[0],
                                       competitors[1],
@@ -52,7 +52,7 @@ def run(matches, rounds):
                                 results[2],
                                 results[3],
                                 results[3] / matches), file=f)
-            print(",,,,,,,,,,", file=f)
+                print(",,,,,,,,,,", file=f)
 
 
 if __name__ == "__main__":
